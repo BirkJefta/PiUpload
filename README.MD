@@ -12,7 +12,7 @@ Installation
 
 
 
-#Before running, ensure that RENDER_ENDPOINT in upload.py is set to your specific endpoint, for instance Render.com
+##Before running, ensure that RENDER_ENDPOINT in upload.py is set to your specific endpoint, for instance Render.com
 
 Make sure Signal K ressources have the folders uploaded-tracks and tracks-pending. Or change the names in your version of the app
 
