@@ -10,7 +10,7 @@ mkdir -p /home/pi/Desktop/PiUpload
 cp upload.py /home/pi/Desktop/PiUpload/
 cp 99-track-upload /etc/NetworkManager/dispatcher.d/
 
-# Sæt rettigheder
+# make scripts executable
 chmod +x /home/pi/Desktop/PiUpload/upload.py
 chmod +x /etc/NetworkManager/dispatcher.d/99-track-upload
 

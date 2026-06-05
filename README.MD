@@ -12,9 +12,12 @@ Installation
 
 
 
-Before running, ensure that RENDER_ENDPOINT in upload.py is set to your specific endpoint, for instance Render.com
+#Before running, ensure that RENDER_ENDPOINT in upload.py is set to your specific endpoint, for instance Render.com
 
 Make sure Signal K ressources have the folders uploaded-tracks and tracks-pending. Or change the names in your version of the app
+remember cron job for better experience:
+ go to crontab -e and write nano, then at the bottom write: 0 * * * * /usr/bin/python3 /home/pi/Desktop/PiUpload/upload.py or whereever you saved it.
+ ctrl + O to save and ctrl + X to exit
 
 How it works
 

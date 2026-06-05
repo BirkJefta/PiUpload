@@ -6,6 +6,9 @@ import sys
 import time as time
 import os
 
+import socket
+
+
 base_url = "http://localhost:3000/signalk/v2/api/resources/"
 tracks_pending_url = base_url + "tracks-pending"
 uploaded_tracks_url = base_url + "uploaded-tracks"
@@ -19,6 +22,14 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
+
+def is_connected():
+    try:
+        socket.create_connection(("8.8.8.8", 53), timeout=3)
+        return True
+    except OSError:
+        pass
+    return False
 
 
 def handle_exit(sig, frame):
@@ -81,4 +92,7 @@ def mark_track_as_uploaded(track_id, track_data):
 
         
 if __name__ == "__main__":
-    process_tracks()
+    if is_connected():
+        process_tracks()
+    else:
+        exit(0)
