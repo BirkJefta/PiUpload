@@ -12,22 +12,29 @@ Installation
 
 
 
-#Before running, ensure that RENDER_ENDPOINT in upload.py is set to your specific endpoint, for instance Render.com
+## Before running, ensure that RENDER_ENDPOINT in upload.py is set to your specific endpoint, for instance Render.com
 
-Make sure Signal K ressources have the folders uploaded-tracks and tracks-pending. Or change the names in your version of the app
-remember cron job for better experience:
- go to crontab -e and write nano, then at the bottom write: 0 * * * * /usr/bin/python3 /home/pi/Desktop/PiUpload/upload.py or whereever you saved it.
- ctrl + O to save and ctrl + X to exit
+Make sure Signal K ressources have the folders uploaded-tracks and tracks-pending. Or change the names in your version of the app.
+
+For better experience, add a cron job:
+
+    crontab -e
+
+Then add this line at the bottom:
+
+    0 * * * * /usr/bin/python3 /home/pi/Desktop/PiUpload/upload.py
+
+Replace the path if you saved the project somewhere else.
 
 How it works
 
     When internet is established, the program
     then gets the tracks recorded during sailing, and uploads them.
-    If successfull moves the pending tacks to uploaded tracks as to not have duplicates.
+    If successfull moves the pending tracks to uploaded tracks as to not have duplicates.
 
     
 
 
-requires a pi with pi os and python 3.
+Requires a Pi with Pi OS and Python 3.
 
-Is intended to work with:https://github.com/BirkJefta/piTracks and https://github.com/BirkJefta/GPXUpload
+Is intended to work with: https://github.com/BirkJefta/piTracks and https://github.com/BirkJefta/GPXUpload
