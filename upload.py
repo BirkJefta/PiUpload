@@ -11,7 +11,7 @@ import socket
 base_url = "http://localhost:3000/signalk/v2/api/resources/"
 tracks_pending_url = base_url + "tracks-pending"
 uploaded_tracks_url = base_url + "uploaded-tracks"
-RENDER_ENDPOINT = "https://gpxupload.onrender.com/upload-json"
+RENDER_ENDPOINT = ""
 
 running = True
 
