@@ -8,7 +8,7 @@ ACTION=$2
 case "$ACTION" in
     up)
         if [ "$INTERFACE" = "wlan0" ]; then
-            /usr/bin/python3 /home/user/Desktop/PiUpload/upload.py
+            /usr/bin/python3 /home/user/PiUpload/upload.py
         fi
         ;;
 esac

@@ -1,21 +1,18 @@
 #!/bin/bash
-# install.sh 
+# install.sh - Den rene version
 
-echo "[*] Installing dependencies..."
 
 sudo apt-get update
 sudo apt-get install -y python3-pip python3-requests
 
+INSTALL_DIR="/home/user/PiUpload"
+mkdir -p $INSTALL_DIR
 
-mkdir -p /home/user/Desktop/PiUpload
-cp upload.py /home/user/Desktop/PiUpload/
+cp upload.py $INSTALL_DIR/
 cp 99-track-upload /etc/NetworkManager/dispatcher.d/
 
-
-chmod +x /home/user/Desktop/PiUpload/upload.py
 sudo chmod +x /etc/NetworkManager/dispatcher.d/99-track-upload
 
+(crontab -l 2>/dev/null; echo "0 * * * * /usr/bin/python3 $INSTALL_DIR/upload.py") | crontab -
 
-(crontab -l 2>/dev/null; echo "0 * * * * /usr/bin/python3 /home/user/Desktop/PiUpload/upload.py") | crontab -
-
-echo "Installation complete."
+echo "Installation complete in $INSTALL_DIR"

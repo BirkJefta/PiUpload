@@ -11,12 +11,15 @@ import socket
 base_url = "http://localhost:3000/signalk/v2/api/resources/"
 tracks_pending_url = base_url + "tracks-pending"
 uploaded_tracks_url = base_url + "uploaded-tracks"
-RENDER_ENDPOINT = ""
+RENDER_ENDPOINT = "https://gpxupload.onrender.com/upload-json"
 
 running = True
 
+script_dir = os.path.dirname(os.path.realpath(__file__))
+log_file = os.path.join(script_dir, 'track_upload.log')
+
 logging.basicConfig(
-    filename='/home/user/Desktop/PiUpload/track_upload.log',
+    filename=log_file,
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
@@ -42,7 +45,7 @@ signal.signal(signal.SIGINT, handle_exit)
 
 
 def process_tracks():
-    log_file = '/home/user/Desktop/PiUpload/track_upload.log'
+    global log_file
     if os.path.exists(log_file) and os.path.getsize(log_file) > 5 * 1024 * 1024:
         with open(log_file, 'r') as f:
             lines = f.readlines()
