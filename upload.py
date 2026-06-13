@@ -51,26 +51,36 @@ def process_tracks():
             lines = f.readlines()
         with open(log_file, 'w') as f:
             f.writelines(lines[-100:])
+    for attempt in range(3):
+        try:
 
-    try:
-        response = requests.get(tracks_pending_url, timeout=5)
-        if response.status_code != 200:
-            logging.error(f"could not fetch tracks. Status: {response.status_code}")
-            return
-        tracks = response.json()
-        for track_id, track_data in tracks.items():
-            if not running:
-                logging.info("Closing process due to signal.")
-                sys.exit(0)
-            render_response = requests.post(RENDER_ENDPOINT, json=track_data, timeout=60)
-            
-            if render_response.status_code == 200:
-                logging.info(f"Success: Track {track_id} uploaded.")
-                mark_track_as_uploaded(track_id, track_data)
+            response = requests.get(tracks_pending_url, timeout=5)
+            if response.status_code != 200:
+                logging.error(f"could not fetch tracks. Status: {response.status_code}")
+                return
+            tracks = response.json()
+            for track_id, track_data in tracks.items():
+                if not running:
+                    logging.info("Closing process due to signal.")
+                    sys.exit(0)
+                render_response = requests.post(RENDER_ENDPOINT, json=track_data, timeout=60)
+                
+                if render_response.status_code == 200:
+                    logging.info(f"Success: Track {track_id} uploaded.")
+                    mark_track_as_uploaded(track_id, track_data)
+                else:
+                    logging.error(f"Error uploading {track_id}: {render_response.text}")
+
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Error processing tracks: {e}")
+            if attempt < 2:
+                logging.info(f"Retrying in 5 seconds... (Attempt {attempt + 2}/3)")
+                time.sleep(5)
             else:
-                logging.error(f"Error uploading {track_id}: {render_response.text}")
-    except requests.exceptions.RequestException as e:
-        logging.error(f"Error processing tracks: {e}")
+                logging.error("Max retries reached. Will try again on next run.")
+                return
+
+
 
 
 def mark_track_as_uploaded(track_id, track_data):
