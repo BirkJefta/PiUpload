@@ -9,7 +9,17 @@ Installation
     ./install.sh
 
 
+    IF IT DOESN'T WORK, THEN IT MIGHT BE BECAUSE OF HOW LINUX READS LINECHANGES. USE:
+    sudo apt-get install -y dos2unix
 
+    dos2unix install.sh
+
+    dos2unix 99-track-upload.sh
+
+    Then try again
+
+    sudo ./install.sh
+    
 
 
 ## Before running, ensure that RENDER_ENDPOINT in upload.py is set to your specific endpoint, for instance Render.com
