@@ -1,12 +1,14 @@
-#checks for Wi-Fi connection and runs upload.py when connected
 #!/bin/bash
+
+#checks for Wi-Fi connection and runs upload.py when connected
+
 INTERFACE=$1
 ACTION=$2
 
 case "$ACTION" in
     up)
         if [ "$INTERFACE" = "wlan0" ]; then
-            /usr/bin/python3 /home/pi/Desktop/Hovedopgave2/PiUpload/upload.py
+            /usr/bin/python3 /home/user/Desktop/PiUpload/upload.py
         fi
         ;;
 esac
